@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { databaseConfig } from './config/database.config';
 import { UsersModule } from './users/users.module';
+import { QueriesModule } from './queries/queries.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UsersModule } from './users/users.module';
     }),
     TypeOrmModule.forRoot(databaseConfig),
     UsersModule,
+    QueriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
