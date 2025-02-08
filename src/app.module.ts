@@ -5,11 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { databaseConfig } from './config/database.config';
 import {
-  UsersModule,
-  QueriesModule,
+  ApiRepositoryModule,
   BooksModule,
   MoviesModule,
-  ApiRepositoryModule,
+  QueriesModule,
 } from './api';
 
 @Module({
@@ -18,11 +17,10 @@ import {
       isGlobal: true,
     }),
     TypeOrmModule.forRoot(databaseConfig),
-    UsersModule,
-    QueriesModule,
+    ApiRepositoryModule,
     BooksModule,
     MoviesModule,
-    ApiRepositoryModule,
+    QueriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
