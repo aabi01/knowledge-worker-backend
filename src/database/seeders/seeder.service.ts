@@ -15,10 +15,10 @@ export class SeederService {
 
   async seed() {
     try {
-      await this.querySeeder.seed();
+      await this.apiRepositorySeeder.seed();
       await this.bookSeeder.seed();
       await this.movieSeeder.seed();
-      await this.apiRepositorySeeder.seed();
+      await this.querySeeder.seed();
       console.log('Database seeding completed successfully');
     } catch (error) {
       console.error('Database seeding failed:', error);
