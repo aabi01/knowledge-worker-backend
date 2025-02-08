@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { ApiParameter } from './api-parameter.entity';
 
 @Entity()
@@ -10,19 +17,19 @@ export class Api {
   name: string;
 
   @Column()
+  endpoint: string;
+
+  @Column()
   description: string;
 
-  @OneToMany(() => ApiParameter, parameter => parameter.api, {
+  @OneToMany(() => ApiParameter, (parameter) => parameter.api, {
     cascade: true,
-    eager: true
+    eager: true,
   })
   parameters: ApiParameter[];
 
   @Column('simple-array')
   availableAttributes: string[];
-
-  @Column({ nullable: true })
-  endpoint?: string;
 
   @CreateDateColumn()
   createdAt: Date;
