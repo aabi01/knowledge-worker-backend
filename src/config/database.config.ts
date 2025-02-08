@@ -8,6 +8,6 @@ export const databaseConfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD ?? 'postgres',
   database: process.env.DB_NAME ?? 'knowledge_worker',
   entities: ['dist/**/*.entity{.ts,.js}'],
-  synchronize: process.env.NODE_ENV !== 'production', // Disable this in production
+  synchronize: false, // Disable auto-synchronization
   logging: process.env.NODE_ENV !== 'production',
 };
