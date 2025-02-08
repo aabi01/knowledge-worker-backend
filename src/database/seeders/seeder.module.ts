@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Query } from '../../queries/entities/query.entity';
-import { QueryParameter } from '../../queries/entities/query-parameter.entity';
-import { Book } from '../../books/entities/book.entity';
+import { Query } from '../../api/queries/entities/query.entity';
+import { QueryParameter } from '../../api/queries/entities/query-parameter.entity';
+import { Book } from '../../api/books/entities/book.entity';
 import { QuerySeeder } from './query.seeder';
 import { BookSeeder } from './book.seeder';
 import { SeederService } from './seeder.service';
