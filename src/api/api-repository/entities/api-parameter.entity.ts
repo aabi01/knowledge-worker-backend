@@ -12,12 +12,6 @@ export class ApiParameter {
   @Column()
   description: string;
 
-  @Column({
-    type: 'enum',
-    enum: ['string', 'number', 'boolean'],
-  })
-  type: 'string' | 'number' | 'boolean';
-
   @Column()
   required: boolean;
 
