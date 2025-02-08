@@ -14,15 +14,52 @@ export class ApiRepositorySeeder {
   async seed() {
     const apis = [
       {
-        id: 'movie-api',
-        name: 'Movie API',
-        description: 'API for managing movie data',
+        id: 'books-api',
+        name: 'Books API',
+        endpoint: '/api/books',
+        description: 'Query books by various parameters',
+        parameters: [
+          {
+            name: 'author',
+            description: 'Author name',
+            required: true,
+          },
+          {
+            name: 'genre',
+            description: 'Book genre',
+            required: true,
+          },
+          {
+            name: 'year',
+            description: 'Publication year',
+            required: false,
+          },
+        ],
+        availableAttributes: [
+          'title',
+          'author',
+          'genre',
+          'price',
+          'availability',
+          'rating',
+          'publishDate',
+        ],
+      },
+      {
+        id: 'movies-api',
+        name: 'Movies API',
         endpoint: '/api/movies',
+        description: 'Query movies and their details',
         parameters: [
           {
             name: 'title',
             description: 'Movie title',
-            required: true,
+            required: false,
+          },
+          {
+            name: 'director',
+            description: 'Movie director',
+            required: false,
           },
           {
             name: 'genre',
@@ -55,7 +92,7 @@ export class ApiRepositorySeeder {
       const savedApi = await this.apiRepository.save(api);
 
       // Create and associate parameters
-      const parameters = apiData.parameters.map(param => {
+      const parameters = apiData.parameters.map((param) => {
         const apiParam = new ApiParameter();
         apiParam.name = param.name;
         apiParam.description = param.description;
