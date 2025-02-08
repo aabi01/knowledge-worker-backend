@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { QueryParameter } from './query-parameter.entity';
 
 @Entity()
@@ -15,16 +22,16 @@ export class Query {
   @Column()
   interval: number;
 
-  @OneToMany(() => QueryParameter, parameter => parameter.query, { 
+  @OneToMany(() => QueryParameter, (parameter) => parameter.query, {
     cascade: true,
-    eager: true 
+    eager: true,
   })
   parameters: QueryParameter[];
 
   @Column('simple-array')
   selectedAttributes: string[];
 
-  @Column({ default: true })
+  @Column()
   isActive: boolean;
 
   @Column({ type: 'timestamp', nullable: true })

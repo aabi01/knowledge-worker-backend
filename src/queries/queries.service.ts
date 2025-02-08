@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Query } from '../entities/query.entity';
+import { Query } from './entities/query.entity';
 import { CreateQueryDto } from './dto/create-query.dto';
 
 @Injectable()
@@ -28,7 +28,10 @@ export class QueriesService {
     return this.queriesRepository.save(query);
   }
 
-  async update(id: string, updateData: Partial<CreateQueryDto>): Promise<Query> {
+  async update(
+    id: string,
+    updateData: Partial<CreateQueryDto>,
+  ): Promise<Query> {
     const query = await this.findOne(id);
     Object.assign(query, updateData);
     return this.queriesRepository.save(query);

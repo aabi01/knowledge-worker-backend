@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Query } from '../../entities/query.entity';
-import { QueryParameter } from '../../entities/query-parameter.entity';
+import { Query } from '../../queries/entities/query.entity';
+import { QueryParameter } from '../../queries/entities/query-parameter.entity';
 import { Book } from '../../books/entities/book.entity';
 import { QuerySeeder } from './query.seeder';
 import { BookSeeder } from './book.seeder';

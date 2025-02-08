@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  Patch,
+} from '@nestjs/common';
 import { QueriesService } from './queries.service';
-import { Query } from '../entities/query.entity';
 import { CreateQueryDto } from './dto/create-query.dto';
+import { Query } from './entities/query.entity';
 
 @Controller('queries')
 export class QueriesController {
