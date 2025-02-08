@@ -7,7 +7,7 @@ export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
   @Get()
-  findAll(): Book[] {
+  findAll(): Promise<Book[]> {
     return this.booksService.findAll();
   }
 }
