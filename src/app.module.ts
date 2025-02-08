@@ -4,7 +4,13 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { databaseConfig } from './config/database.config';
-import { UsersModule, QueriesModule, BooksModule, MoviesModule } from './api';
+import {
+  UsersModule,
+  QueriesModule,
+  BooksModule,
+  MoviesModule,
+  ApiRepositoryModule,
+} from './api';
 
 @Module({
   imports: [
@@ -16,6 +22,7 @@ import { UsersModule, QueriesModule, BooksModule, MoviesModule } from './api';
     QueriesModule,
     BooksModule,
     MoviesModule,
+    ApiRepositoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
