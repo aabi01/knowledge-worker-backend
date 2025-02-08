@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Api } from '../../api/api-repository/entities/api.entity';
 import { ApiParameter } from '../../api/api-repository/entities/api-parameter.entity';
+import { MOCKED_APIS } from './seed-data/apis.data';
 
 @Injectable()
 export class ApiRepositorySeeder {
@@ -12,73 +13,7 @@ export class ApiRepositorySeeder {
   ) {}
 
   async seed() {
-    const apis = [
-      {
-        id: 'books-api',
-        name: 'Books API',
-        endpoint: '/api/books',
-        description: 'Query books by various parameters',
-        parameters: [
-          {
-            name: 'author',
-            description: 'Author name',
-            required: true,
-          },
-          {
-            name: 'genre',
-            description: 'Book genre',
-            required: true,
-          },
-          {
-            name: 'year',
-            description: 'Publication year',
-            required: false,
-          },
-        ],
-        availableAttributes: [
-          'title',
-          'author',
-          'genre',
-          'price',
-          'availability',
-          'rating',
-          'publishDate',
-        ],
-      },
-      {
-        id: 'movies-api',
-        name: 'Movies API',
-        endpoint: '/api/movies',
-        description: 'Query movies and their details',
-        parameters: [
-          {
-            name: 'title',
-            description: 'Movie title',
-            required: false,
-          },
-          {
-            name: 'director',
-            description: 'Movie director',
-            required: false,
-          },
-          {
-            name: 'genre',
-            description: 'Movie genre',
-            required: true,
-          },
-        ],
-        availableAttributes: [
-          'title',
-          'director',
-          'genre',
-          'releaseDate',
-          'rating',
-          'duration',
-        ],
-      },
-    ];
-
-    for (const apiData of apis) {
+    for (const apiData of MOCKED_APIS) {
       // Create the main API entity
       const api = this.apiRepository.create({
         id: apiData.id,
