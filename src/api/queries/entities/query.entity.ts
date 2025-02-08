@@ -28,7 +28,7 @@ export class Query {
   })
   parameters: QueryParameter[];
 
-  @Column('simple-array')
+  @Column('text', { array: true })
   selectedAttributes: string[];
 
   @Column()

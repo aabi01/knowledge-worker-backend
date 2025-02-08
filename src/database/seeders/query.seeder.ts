@@ -13,7 +13,10 @@ export class QuerySeeder {
 
   async seed() {
     for (const queryData of MOCKED_QUERIES) {
-      const query = this.queryRepository.create(queryData);
+      const query = this.queryRepository.create({
+        ...queryData,
+        selectedAttributes: queryData.selectedAttributes
+      });
       await this.queryRepository.save(query);
       console.log(`Seeded query: ${query.name}`);
     }

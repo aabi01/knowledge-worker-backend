@@ -11,9 +11,15 @@ import { BookSeeder } from './book.seeder';
 import { MovieSeeder } from './movie.seeder';
 import { ApiRepositorySeeder } from './api-repository.seeder';
 import { SeederService } from './seeder.service';
+import { ConfigModule } from '@nestjs/config';
+import { databaseConfig } from '../../config/database.config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRoot(databaseConfig),
     TypeOrmModule.forFeature([Query, QueryParameter, Book, Movie, Api, ApiParameter]),
   ],
   providers: [QuerySeeder, BookSeeder, MovieSeeder, ApiRepositorySeeder, SeederService],

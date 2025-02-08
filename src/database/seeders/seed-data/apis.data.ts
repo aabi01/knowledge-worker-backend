@@ -1,6 +1,6 @@
 export const MOCKED_APIS = [
   {
-    id: 'books-api',
+    id: '550e8400-e29b-41d4-a716-446655440000',
     name: 'Books API',
     endpoint: '/api/books',
     description: 'Query books by various parameters',
@@ -32,7 +32,7 @@ export const MOCKED_APIS = [
     ],
   },
   {
-    id: 'movies-api',
+    id: '550e8400-e29b-41d4-a716-446655440001',
     name: 'Movies API',
     endpoint: '/api/movies',
     description: 'Query movies and their details',
@@ -40,17 +40,17 @@ export const MOCKED_APIS = [
       {
         name: 'title',
         description: 'Movie title',
-        required: false,
-      },
-      {
-        name: 'director',
-        description: 'Movie director',
-        required: false,
+        required: true,
       },
       {
         name: 'genre',
         description: 'Movie genre',
-        required: true,
+        required: false,
+      },
+      {
+        name: 'year',
+        description: 'Release year',
+        required: false,
       },
     ],
     availableAttributes: [

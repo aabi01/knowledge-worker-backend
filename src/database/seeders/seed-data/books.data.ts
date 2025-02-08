@@ -1,5 +1,6 @@
 export const MOCKED_BOOKS = [
   {
+    id: '550e8400-e29b-41d4-a716-446655440020',
     title: 'The Midnight Library',
     author: 'Matt Haig',
     genre: 'Fiction',
@@ -9,6 +10,7 @@ export const MOCKED_BOOKS = [
     publishDate: '2020-08-13',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440021',
     title: 'Dune',
     author: 'Frank Herbert',
     genre: 'Science Fiction',
@@ -18,6 +20,7 @@ export const MOCKED_BOOKS = [
     publishDate: '1965-08-01',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440022',
     title: 'Project Hail Mary',
     author: 'Andy Weir',
     genre: 'Science Fiction',
@@ -27,6 +30,7 @@ export const MOCKED_BOOKS = [
     publishDate: '2021-05-04',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440023',
     title: 'The Silent Patient',
     author: 'Alex Michaelides',
     genre: 'Thriller',
@@ -36,6 +40,7 @@ export const MOCKED_BOOKS = [
     publishDate: '2019-02-05',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440024',
     title: 'Atomic Habits',
     author: 'James Clear',
     genre: 'Self-Help',
@@ -45,6 +50,7 @@ export const MOCKED_BOOKS = [
     publishDate: '2018-10-16',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440025',
     title: 'The Thursday Murder Club',
     author: 'Richard Osman',
     genre: 'Mystery',
@@ -54,6 +60,7 @@ export const MOCKED_BOOKS = [
     publishDate: '2020-09-03',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440026',
     title: 'Where the Crawdads Sing',
     author: 'Delia Owens',
     genre: 'Literary Fiction',
@@ -63,6 +70,7 @@ export const MOCKED_BOOKS = [
     publishDate: '2018-08-14',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440027',
     title: 'The Psychology of Money',
     author: 'Morgan Housel',
     genre: 'Finance',

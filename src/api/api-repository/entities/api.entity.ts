@@ -28,7 +28,7 @@ export class Api {
   })
   parameters: ApiParameter[];
 
-  @Column('simple-array')
+  @Column('text', { array: true })
   availableAttributes: string[];
 
   @CreateDateColumn()

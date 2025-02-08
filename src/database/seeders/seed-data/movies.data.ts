@@ -1,5 +1,6 @@
 export const MOCKED_MOVIES = [
   {
+    id: '550e8400-e29b-41d4-a716-446655440030',
     title: 'Inception',
     director: 'Christopher Nolan',
     genre: 'Science Fiction',
@@ -8,6 +9,7 @@ export const MOCKED_MOVIES = [
     duration: '2h 28min',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440031',
     title: 'The Shawshank Redemption',
     director: 'Frank Darabont',
     genre: 'Drama',
@@ -16,6 +18,7 @@ export const MOCKED_MOVIES = [
     duration: '2h 22min',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440032',
     title: 'Pulp Fiction',
     director: 'Quentin Tarantino',
     genre: 'Crime',
@@ -24,6 +27,7 @@ export const MOCKED_MOVIES = [
     duration: '2h 34min',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440033',
     title: 'The Grand Budapest Hotel',
     director: 'Wes Anderson',
     genre: 'Comedy',
@@ -32,6 +36,7 @@ export const MOCKED_MOVIES = [
     duration: '1h 39min',
   },
   {
+    id: '550e8400-e29b-41d4-a716-446655440034',
     title: 'Parasite',
     director: 'Bong Joon-ho',
     genre: 'Drama',
@@ -40,27 +45,21 @@ export const MOCKED_MOVIES = [
     duration: '2h 12min',
   },
   {
-    title: 'The Dark Knight',
+    id: '550e8400-e29b-41d4-a716-446655440035',
+    title: 'The Matrix',
+    director: 'Lana and Lilly Wachowski',
+    genre: 'Science Fiction',
+    releaseDate: '1999-03-31',
+    rating: 4.8,
+    duration: '2h 16min',
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440036',
+    title: 'Interstellar',
     director: 'Christopher Nolan',
-    genre: 'Action',
-    releaseDate: '2008-07-18',
-    rating: 4.9,
-    duration: '2h 32min',
-  },
-  {
-    title: 'La La Land',
-    director: 'Damien Chazelle',
-    genre: 'Musical',
-    releaseDate: '2016-12-09',
-    rating: 4.5,
-    duration: '2h 8min',
-  },
-  {
-    title: 'Get Out',
-    director: 'Jordan Peele',
-    genre: 'Horror',
-    releaseDate: '2017-02-24',
+    genre: 'Science Fiction',
+    releaseDate: '2014-11-07',
     rating: 4.7,
-    duration: '1h 44min',
+    duration: '2h 49min',
   },
 ];
