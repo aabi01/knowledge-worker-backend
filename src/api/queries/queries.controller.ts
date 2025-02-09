@@ -6,7 +6,6 @@ import {
   Param,
   Delete,
   Put,
-  Patch,
 } from '@nestjs/common';
 import { QueriesService } from './queries.service';
 import { CreateQueryDto } from './dto/create-query.dto';
@@ -42,15 +41,5 @@ export class QueriesController {
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
     return this.queriesService.remove(id);
-  }
-
-  @Patch(':id/toggle-active')
-  toggleActive(@Param('id') id: string): Promise<Query> {
-    return this.queriesService.toggleActive(id);
-  }
-
-  @Patch(':id/executed')
-  updateLastExecuted(@Param('id') id: string): Promise<Query> {
-    return this.queriesService.updateLastExecuted(id);
   }
 }
