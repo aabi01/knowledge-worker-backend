@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { Book } from '../../api/books/entities/book.entity';
 import { MOCKED_BOOKS } from './seed-data/books.data';
 
@@ -11,10 +11,12 @@ export class BookSeeder {
     private bookRepository: Repository<Book>,
   ) {}
 
-  async seed() {
+  async seed(queryRunner?: QueryRunner) {
+    const repository = queryRunner ? queryRunner.manager.getRepository(Book) : this.bookRepository;
+
     for (const bookData of MOCKED_BOOKS) {
-      const book = this.bookRepository.create(bookData);
-      await this.bookRepository.save(book);
+      const book = repository.create(bookData);
+      await repository.save(book);
       console.log(`Seeded book: ${book.title}`);
     }
   }

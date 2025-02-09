@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { Api } from '../../api/api-repository/entities/api.entity';
 import { ApiParameter } from '../../api/api-repository/entities/api-parameter.entity';
 import { MOCKED_APIS } from './seed-data/apis.data';
@@ -12,10 +12,17 @@ export class ApiRepositorySeeder {
     private apiRepository: Repository<Api>,
   ) {}
 
-  async seed() {
+  async seed(queryRunner?: QueryRunner) {
+    const repository = queryRunner
+      ? queryRunner.manager.getRepository(Api)
+      : this.apiRepository;
+    const parameterRepository = queryRunner
+      ? queryRunner.manager.getRepository(ApiParameter)
+      : this.apiRepository.manager.getRepository(ApiParameter);
+
     for (const apiData of MOCKED_APIS) {
       // Create the main API entity
-      const api = this.apiRepository.create({
+      const api = repository.create({
         id: apiData.id,
         name: apiData.name,
         description: apiData.description,
@@ -24,7 +31,7 @@ export class ApiRepositorySeeder {
       });
 
       // Save the API first
-      const savedApi = await this.apiRepository.save(api);
+      const savedApi = await repository.save(api);
 
       // Create and associate parameters
       const parameters = apiData.parameters.map((param) => {
@@ -36,11 +43,11 @@ export class ApiRepositorySeeder {
         return apiParam;
       });
 
-      // Update API with parameters
-      savedApi.parameters = parameters;
-      await this.apiRepository.save(savedApi);
-
-      console.log(`Seeded API: ${savedApi.name}`);
+      // Save all parameters
+      await parameterRepository.save(parameters);
+      console.log(
+        `Seeded API: ${api.name} with ${parameters.length} parameters`,
+      );
     }
   }
 }

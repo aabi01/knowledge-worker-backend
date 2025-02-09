@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { Movie } from '../../api/movies/entities/movie.entity';
 import { MOCKED_MOVIES } from './seed-data/movies.data';
 
@@ -11,10 +11,12 @@ export class MovieSeeder {
     private movieRepository: Repository<Movie>,
   ) {}
 
-  async seed() {
+  async seed(queryRunner?: QueryRunner) {
+    const repository = queryRunner ? queryRunner.manager.getRepository(Movie) : this.movieRepository;
+
     for (const movieData of MOCKED_MOVIES) {
-      const movie = this.movieRepository.create(movieData);
-      await this.movieRepository.save(movie);
+      const movie = repository.create(movieData);
+      await repository.save(movie);
       console.log(`Seeded movie: ${movie.title}`);
     }
   }

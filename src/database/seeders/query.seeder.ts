@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, QueryRunner } from 'typeorm';
 import { Query } from '../../api/queries/entities/query.entity';
 import { MOCKED_QUERIES } from './seed-data/queries.data';
 
@@ -11,13 +11,15 @@ export class QuerySeeder {
     private queryRepository: Repository<Query>,
   ) {}
 
-  async seed() {
+  async seed(queryRunner?: QueryRunner) {
+    const repository = queryRunner ? queryRunner.manager.getRepository(Query) : this.queryRepository;
+
     for (const queryData of MOCKED_QUERIES) {
-      const query = this.queryRepository.create({
+      const query = repository.create({
         ...queryData,
         selectedAttributes: queryData.selectedAttributes
       });
-      await this.queryRepository.save(query);
+      await repository.save(query);
       console.log(`Seeded query: ${query.name}`);
     }
   }
