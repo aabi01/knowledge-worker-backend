@@ -4,7 +4,12 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { databaseConfig } from './config/database.config';
-import { UsersModule } from './users/users.module';
+import {
+  ApiRepositoryModule,
+  BooksModule,
+  MoviesModule,
+  QueriesModule,
+} from './api';
 
 @Module({
   imports: [
@@ -12,7 +17,10 @@ import { UsersModule } from './users/users.module';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot(databaseConfig),
-    UsersModule,
+    ApiRepositoryModule,
+    BooksModule,
+    MoviesModule,
+    QueriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
