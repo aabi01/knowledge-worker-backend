@@ -3,13 +3,14 @@ import { ApiRepositoryController } from './api-repository.controller';
 import { ApiRepositoryService } from './api-repository.service';
 import { Api } from './entities/api.entity';
 import { ApiParameter } from './entities/api-parameter.entity';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 describe('ApiRepositoryController', () => {
   let controller: ApiRepositoryController;
   let service: ApiRepositoryService;
 
   const mockApi: Api = {
-    id: 'api-1',
+    id: '550e8400-e29b-41d4-a716-446655440000',
     name: 'Weather API',
     endpoint: '/api/weather',
     description: 'Get weather information',
@@ -35,7 +36,7 @@ describe('ApiRepositoryController', () => {
 
   const mockApiRepositoryService = {
     findAll: jest.fn(),
-    findAllById: jest.fn(),
+    findById: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -71,48 +72,41 @@ describe('ApiRepositoryController', () => {
       expect(result).toBe(expectedApis);
       expect(mockApiRepositoryService.findAll).toHaveBeenCalledTimes(1);
     });
-
-    it('should handle errors from the service', async () => {
-      const error = new Error('Failed to fetch APIs');
-      mockApiRepositoryService.findAll.mockRejectedValue(error);
-
-      await expect(controller.findAll()).rejects.toThrow(error);
-      expect(mockApiRepositoryService.findAll).toHaveBeenCalledTimes(1);
-    });
   });
 
-  describe('findAllById', () => {
-    it('should return APIs matching the provided IDs', async () => {
-      const ids = ['api-1', 'api-2'];
-      const expectedApis = [mockApi];
-      mockApiRepositoryService.findAllById.mockResolvedValue(expectedApis);
+  describe('findById', () => {
+    const validUuid = '550e8400-e29b-41d4-a716-446655440000';
+    const invalidUuid = 'not-a-uuid';
 
-      const result = await controller.findAllById(ids);
+    it('should return an API when given a valid UUID', async () => {
+      mockApiRepositoryService.findById.mockResolvedValue(mockApi);
 
-      expect(result).toBe(expectedApis);
-      expect(mockApiRepositoryService.findAllById).toHaveBeenCalledTimes(1);
-      expect(mockApiRepositoryService.findAllById).toHaveBeenCalledWith(ids);
+      const result = await controller.findById(validUuid);
+
+      expect(result).toBe(mockApi);
+      expect(mockApiRepositoryService.findById).toHaveBeenCalledWith(validUuid);
+      expect(mockApiRepositoryService.findById).toHaveBeenCalledTimes(1);
     });
 
-    it('should handle errors from the service when finding by IDs', async () => {
-      const ids = ['api-1', 'api-2'];
-      const error = new Error('Failed to fetch APIs by IDs');
-      mockApiRepositoryService.findAllById.mockRejectedValue(error);
+    it('should throw BadRequestException when given an invalid UUID', async () => {
+      await expect(controller.findById(invalidUuid))
+        .rejects
+        .toThrow(BadRequestException);
 
-      await expect(controller.findAllById(ids)).rejects.toThrow(error);
-      expect(mockApiRepositoryService.findAllById).toHaveBeenCalledTimes(1);
+      expect(mockApiRepositoryService.findById).not.toHaveBeenCalled();
     });
 
-    it('should handle empty ID array', async () => {
-      const ids = [];
-      const expectedApis = [];
-      mockApiRepositoryService.findAllById.mockResolvedValue(expectedApis);
+    it('should propagate NotFoundException from service', async () => {
+      mockApiRepositoryService.findById.mockRejectedValue(
+        new NotFoundException(`API with ID "${validUuid}" not found`)
+      );
 
-      const result = await controller.findAllById(ids);
+      await expect(controller.findById(validUuid))
+        .rejects
+        .toThrow(NotFoundException);
 
-      expect(result).toEqual(expectedApis);
-      expect(mockApiRepositoryService.findAllById).toHaveBeenCalledTimes(1);
-      expect(mockApiRepositoryService.findAllById).toHaveBeenCalledWith(ids);
+      expect(mockApiRepositoryService.findById).toHaveBeenCalledWith(validUuid);
+      expect(mockApiRepositoryService.findById).toHaveBeenCalledTimes(1);
     });
   });
 });
