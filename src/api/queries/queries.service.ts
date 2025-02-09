@@ -41,16 +41,4 @@ export class QueriesService {
     const query = await this.findOne(id);
     await this.queriesRepository.remove(query);
   }
-
-  async updateLastExecuted(id: string): Promise<Query> {
-    const query = await this.findOne(id);
-    query.lastExecuted = new Date();
-    return this.queriesRepository.save(query);
-  }
-
-  async toggleActive(id: string): Promise<Query> {
-    const query = await this.findOne(id);
-    query.isActive = !query.isActive;
-    return this.queriesRepository.save(query);
-  }
 }

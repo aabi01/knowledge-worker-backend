@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { Api } from './entities/api.entity';
@@ -12,16 +12,20 @@ export class ApiRepositoryService {
 
   findAll(): Promise<Api[]> {
     return this.apiRepository.find({
-      relations: ['parameters']
+      relations: ['parameters'],
     });
   }
 
-  findAllById(ids: string[]): Promise<Api[]> {
-    return this.apiRepository.find({
-      where: {
-        id: In(ids)
-      },
-      relations: ['parameters']
+  async findById(id: string): Promise<Api> {
+    const api = await this.apiRepository.findOne({
+      where: { id },
+      relations: ['parameters'],
     });
+
+    if (!api) {
+      throw new NotFoundException(`API with ID "${id}" not found`);
+    }
+
+    return api;
   }
 }
