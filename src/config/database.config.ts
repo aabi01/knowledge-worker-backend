@@ -1,4 +1,10 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { Api } from '../api/api-repository/entities/api.entity';
+import { ApiParameter } from '../api/api-repository/entities/api-parameter.entity';
+import { Book } from '../api/books/entities/book.entity';
+import { Movie } from '../api/movies/entities/movie.entity';
+import { Query } from '../api/queries/entities/query.entity';
+import { QueryParameter } from '../api/queries/entities/query-parameter.entity';
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -7,7 +13,7 @@ export const databaseConfig: TypeOrmModuleOptions = {
   username: process.env.DB_USERNAME ?? 'postgres',
   password: process.env.DB_PASSWORD ?? 'postgres',
   database: process.env.DB_NAME ?? 'knowledge_worker',
-  entities: ['dist/**/*.entity{.ts,.js}'],
-  synchronize: process.env.NODE_ENV !== 'production', // Disable this in production
+  entities: [Api, ApiParameter, Book, Movie, Query, QueryParameter],
+  synchronize: false, // Disable auto-synchronization
   logging: process.env.NODE_ENV !== 'production',
 };
